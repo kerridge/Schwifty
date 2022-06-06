@@ -18,13 +18,13 @@ struct WidgetLoadingView
     init(
         loadingState: WidgetLoadingState<Item>,
         @ViewBuilder content: @escaping (Item) -> Content,
-        @ViewBuilder emptyView: @escaping () -> EmptyView,
-        @ViewBuilder errorView: @escaping (Error) -> ErrorView
+        @ViewBuilder empty: @escaping () -> EmptyView,
+        @ViewBuilder error: @escaping (Error) -> ErrorView
     ) {
         state = loadingState
         makeContent = content
-        makeEmpty = emptyView
-        makeError = errorView
+        makeEmpty = empty
+        makeError = error
     }
     
     var body: some View {

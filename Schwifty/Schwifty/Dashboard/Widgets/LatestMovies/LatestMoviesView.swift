@@ -19,8 +19,8 @@ struct LatestMoviesView<ViewModel: LatestMoviesViewModel>: View {
                         }
                     }
                 },
-                emptyView: { EmptyView() },
-                errorView: { _ in
+                empty: { EmptyView() },
+                error: { _ in
                     EmptyView()
                 }
             )
