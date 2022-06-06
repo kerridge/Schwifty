@@ -1,31 +1,29 @@
 import SwiftUI
 
-struct LatestMoviesView: View {
-    @ObservedObject var viewModel: LatestMoviesViewModel
+struct LatestMoviesView<ViewModel: LatestMoviesViewModel>: View {
+    @ObservedObject var viewModel: ViewModel
     
     var body: some View {
         WidgetCard(
             title: viewModel.title,
-            rightAction: { Text("yo") }
+            rightAction: {
+                Text("yo")
+            }
         ) {
-            Group {
-                switch (viewModel.state) {
-                case .empty:
-                    EmptyView()
-                    
-                case .loading(let shimmer):
-                    EmptyView()
-                    
-                case .loaded(let movies):
+            WidgetLoadingView(
+                loadingState: viewModel.state,
+                content: { movies in
                     List {
                         ForEach(movies, id: \.name) { movie in
                             Text(movie.name)
                         }
                     }
-                case .error(_):
+                },
+                emptyView: { EmptyView() },
+                errorView: { _ in
                     EmptyView()
                 }
-            }
+            )
         }
 //        .task {
 //            viewModel.load()

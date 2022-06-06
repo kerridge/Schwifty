@@ -15,7 +15,7 @@ extension Widget {
     }
 }
 
-extension Widget: AsyncWidgetLoadable {
+extension Widget {
     func load() async {
         switch self {
         case .latestMovies(let viewModel):
