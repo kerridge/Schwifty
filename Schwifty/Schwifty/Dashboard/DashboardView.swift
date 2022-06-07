@@ -23,10 +23,10 @@ struct DashboardView: View {
     }
 }
 
-struct DashboardView_Previews: PreviewProvider {
-    static var previews: some View {
-        let vm = DashboardViewModel()
-        
-        DashboardView(viewModel: vm)
-    }
-}
+//struct DashboardView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        let vm = DashboardViewModel(widgetStore: )
+//        
+//        DashboardView(viewModel: vm)
+//    }
+//}

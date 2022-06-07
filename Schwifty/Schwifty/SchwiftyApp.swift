@@ -5,7 +5,7 @@ struct SchwiftyApp: App {
     var body: some Scene {
         WindowGroup {
             DashboardView(
-                viewModel: DashboardViewModel()
+                viewModel: DashboardViewModel(widgetStore: .init())
             )
         }
     }
