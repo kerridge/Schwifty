@@ -1,11 +1,21 @@
 import SwiftUI
 
-final class LatestMoviesViewModel: ObservableObject, AsyncWidgetLoadable {
+struct LatestMoviesInputs {
+    var title: String
+}
+
+final class LatestMoviesViewModel: WidgetViewModel, AsyncWidgetLoadable {
+    typealias Dependencies = LatestMoviesInputs
+    
     @Published private(set) var state: WidgetLoadingState<LatestMovies> = .empty
     
-    @State private(set) var title: String = "Latest Movies"
+    var title: String = "Latest Movies"
     
     private var latest: LatestMovies = .init(movies: [])
+    
+    init(dependencies: LatestMoviesInputs) {
+        self.title = dependencies.title
+    }
     
     struct LatestMovies {
         var movies: [MovieListItem]

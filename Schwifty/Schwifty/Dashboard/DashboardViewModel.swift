@@ -1,20 +1,27 @@
 import Foundation
 import SwiftUI
 
-@MainActor final class DashboardViewModel: ObservableObject {
-    @Published var title: String
+final class DashboardViewModel: ObservableObject {
+    @Published var title: String = "Movies!"
     
-    @Published var widgets: [Widget]
+    @Published var widgets: [Widget] = []
     
-    var latestMoviesVM = LatestMoviesViewModel()
+    // exhaustive list of available widgets
+    lazy var allWidgets: [Widget] = [
+        .latestMovies(latestMoviesVM),
+        .trendingMovies
+    ]
     
-    init(title: String) {
-        self.title = title
-        
-        // widgets we want to display
-        self.widgets = [
-            .latestMovies(viewModel: latestMoviesVM)
-        ]
+    // will probably come from user defaults
+    let selectedWidgets: [String] = [
+        "latest",
+        "trending"
+    ]
+    
+    lazy var latestMoviesVM = LatestMoviesViewModel(dependencies: .init(title: "Latest Movies"))
+    
+    init() {
+        self.widgets = mapToWidgetList(selectedWidgets)
     }
     
     func loadWidgets() async {
@@ -24,6 +31,15 @@ import SwiftUI
                     await widget.load()
                 }
             }
+        }
+    }
+    
+    /// Maps strings from UserDefaults to a list of assembled `Widget`s
+    func mapToWidgetList(_ selectedWidgets: [String]) -> [Widget] {
+        return selectedWidgets.compactMap { selectedWidget in
+            self.allWidgets.first(where: {
+                $0.rawValue == selectedWidget
+            })
         }
     }
 }

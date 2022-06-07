@@ -1,7 +1,13 @@
 import SwiftUI
 
 enum Widget {
-    case latestMovies(viewModel: LatestMoviesViewModel)
+    enum AvailableTypes: String {
+        case latestMovies = "latest"
+        case trendingMovies = "trending"
+    }
+    
+    case latestMovies(LatestMoviesViewModel)
+    case trendingMovies
 }
 
 extension Widget {
@@ -11,6 +17,8 @@ extension Widget {
         switch self {
         case .latestMovies(let vm):
             LatestMoviesView(viewModel: vm)
+        case .trendingMovies:
+            EmptyView()
         }
     }
 }
@@ -20,6 +28,8 @@ extension Widget {
         switch self {
         case .latestMovies(let viewModel):
             await viewModel.load()
+        case .trendingMovies:
+            print("load")
         }
     }
 }
@@ -30,7 +40,9 @@ extension Widget: Identifiable {
     var rawValue: String {
         switch (self) {
         case .latestMovies(_):
-            return "latest movies"
+            return Widget.AvailableTypes.latestMovies.rawValue
+        case .trendingMovies:
+            return Widget.AvailableTypes.trendingMovies.rawValue
         }
     }
 }
