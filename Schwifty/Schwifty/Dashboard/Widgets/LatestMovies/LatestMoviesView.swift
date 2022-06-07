@@ -12,9 +12,9 @@ struct LatestMoviesView<ViewModel: LatestMoviesViewModel>: View {
         ) {
             WidgetLoadingView(
                 loadingState: viewModel.state,
-                content: { movies in
+                content: { latest in
                     List {
-                        ForEach(movies, id: \.name) { movie in
+                        ForEach(latest.movies, id: \.name) { movie in
                             Text(movie.name)
                         }
                     }
@@ -25,8 +25,5 @@ struct LatestMoviesView<ViewModel: LatestMoviesViewModel>: View {
                 }
             )
         }
-//        .task {
-//            viewModel.load()
-//        }
     }
 }

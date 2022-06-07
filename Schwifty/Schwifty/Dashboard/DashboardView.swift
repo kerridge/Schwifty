@@ -12,14 +12,14 @@ struct DashboardView: View {
             
             ForEach(viewModel.widgets) { widget in
                 widget.view()
-                    .task {
-                        await viewModel.loadWidgets()
-                    }
             }
             
             Spacer()
         }
         .background(Color.gray)
+        .task {
+            await viewModel.loadWidgets()
+        }
     }
 }
 

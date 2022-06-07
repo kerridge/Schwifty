@@ -1,11 +1,17 @@
 import SwiftUI
 
 final class LatestMoviesViewModel: ObservableObject, AsyncWidgetLoadable {
-    @Published private(set) var state: WidgetLoadingState<[MovieListItem]> = .empty
+    @Published private(set) var state: WidgetLoadingState<LatestMovies> = .empty
     
     @State private(set) var title: String = "Latest Movies"
     
-    private var movies: [MovieListItem] = []
+    private var latest: LatestMovies = .init(movies: [])
+    
+    struct LatestMovies {
+        var movies: [MovieListItem]
+        
+        static let placeholder = LatestMovies(movies: MovieListItem.placeholders)
+    }
     
     struct MovieListItem {
         let name: String
@@ -21,18 +27,18 @@ final class LatestMoviesViewModel: ObservableObject, AsyncWidgetLoadable {
     
     @MainActor
     func load() async {
-        self.state = .loading(placeholder: MovieListItem.placeholders)
+        self.state = .loading(placeholder: .placeholder)
         
         let oneSecond: UInt64 = 1_000_000_000
-        try! await Task.sleep(nanoseconds: oneSecond * 5)
+        try! await Task.sleep(nanoseconds: oneSecond * 8)
         
         let response = [
             LatestMovieDTO(name: "movie 1"),
             LatestMovieDTO(name: "movie 2")
         ]
         
-        movies = response.map { MovieListItem(movie: $0) }
+        latest.movies = response.map { MovieListItem(movie: $0) }
         
-        self.state = .loaded(content: movies)
+        self.state = .loaded(content: latest)
     }
 }

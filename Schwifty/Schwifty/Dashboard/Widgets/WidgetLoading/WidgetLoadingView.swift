@@ -32,6 +32,7 @@ struct WidgetLoadingView
         case let .loading(placeholders):
             makeContent(placeholders)
                 .redacted(reason: .placeholder)
+                .shimmer()
                 .transition(fade)
             
         case let .loaded(content):
