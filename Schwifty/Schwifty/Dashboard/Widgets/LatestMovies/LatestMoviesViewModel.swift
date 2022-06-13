@@ -2,10 +2,13 @@ import SwiftUI
 
 struct LatestMoviesInputs {
     var title: String
+    let service: LatestMoviesServiceable
 }
 
 final class LatestMoviesViewModel: WidgetViewModel, AsyncWidgetLoadable {
     typealias Dependencies = LatestMoviesInputs
+    
+    private let service: LatestMoviesServiceable
     
     @Published private(set) var state: WidgetLoadingState<LatestMovies> = .empty
     
@@ -15,24 +18,7 @@ final class LatestMoviesViewModel: WidgetViewModel, AsyncWidgetLoadable {
     
     init(dependencies: LatestMoviesInputs) {
         self.title = dependencies.title
-    }
-    
-    struct LatestMovies {
-        var movies: [MovieListItem]
-        
-        static let placeholder = LatestMovies(movies: MovieListItem.placeholders)
-    }
-    
-    struct MovieListItem {
-        let name: String
-        
-        init(movie: LatestMovieDTO) {
-            name = movie.name
-        }
-        
-        static let placeholders = LatestMovieDTO.placeholders.map {
-            MovieListItem(movie: $0)
-        }
+        self.service = dependencies.service
     }
     
     @MainActor
@@ -40,15 +26,18 @@ final class LatestMoviesViewModel: WidgetViewModel, AsyncWidgetLoadable {
         self.state = .loading(placeholder: .placeholder)
         
         let oneSecond: UInt64 = 1_000_000_000
-        try! await Task.sleep(nanoseconds: oneSecond * 8)
+//        try! await Task.sleep(nanoseconds: oneSecond * 2)
         
-        let response = [
-            LatestMovieDTO(name: "movie 1"),
-            LatestMovieDTO(name: "movie 2")
-        ]
+        let result = await service.getLatest()
         
-        latest.movies = response.map { MovieListItem(movie: $0) }
+        switch result {
+        case .success(let page):
+            latest.movies = page.results.map { MovieListItem(movie: $0) }
+            
+        case .failure(let error):
+            return self.state = .error(error)
+        }
         
-        self.state = .loaded(content: latest)
+        return self.state = .loaded(content: latest)
     }
 }

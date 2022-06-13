@@ -14,8 +14,8 @@ struct LatestMoviesView<ViewModel: LatestMoviesViewModel>: View {
                 loadingState: viewModel.state,
                 content: { latest in
                     List {
-                        ForEach(latest.movies, id: \.name) { movie in
-                            Text(movie.name)
+                        ForEach(latest.movies) { movie in
+                            Text(movie.title)
                         }
                     }
                 },

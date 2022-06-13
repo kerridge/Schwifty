@@ -9,7 +9,13 @@ extension HTTPClient {
         endpoint: Endpoint,
         responseModel: T.Type
     ) async -> Result<T, RequestError> {
-        guard let url = URL(string: endpoint.baseURL + endpoint.path) else {
+        var path = endpoint.path
+        
+        while path.hasPrefix("/") {
+            path.remove(at: path.startIndex)
+        }
+        
+        guard let url = URL(string: endpoint.baseURL + path) else {
             return .failure(.invalidURL)
         }
         

@@ -8,23 +8,23 @@ final class DashboardViewModel: ObservableObject {
     
     let widgetStore: WidgetStore
     
-    // exhaustive list of available widgets
+    // exhaustive list of available assembled widgets
     lazy var allWidgets: [Widget] = [
         .latestMovies(latestMoviesVM),
         .trendingMovies
     ]
     
-    lazy var latestMoviesVM = LatestMoviesViewModel(dependencies: .init(title: "Latest Movies"))
+    lazy var latestMoviesVM = LatestMoviesViewModel(
+        dependencies: .init(
+            title: "Latest Movies",
+            service: LatestMoviesService()))
     
     init(widgetStore: WidgetStore) {
         self.widgetStore = widgetStore
+        self.widgetStore.updateAvailable(allWidgets)
         
-        self.getSelectedWidgets()
-        
-        // If user has no selected widgets, show all
-        if self.widgets.isEmpty {
-            self.widgets = self.allWidgets
-        }
+        // present the users selected widgets
+        self.widgets = widgetStore.selected
     }
     
     func loadWidgets() async {
@@ -37,16 +37,7 @@ final class DashboardViewModel: ObservableObject {
         }
     }
     
-    private func getSelectedWidgets() {
-        let selectedWidgets = widgetStore.fetch()
-        
-        self.widgets = WidgetStore.mapToWidgets(
-            selected: selectedWidgets,
-            available: allWidgets
-        )
-    }
-    
-    private func cacheSelectedWidgets() {
-        widgetStore.save(self.allWidgets)
+    private func updateSelectedWidgets() {
+        widgetStore.updateSelected(widgets)
     }
 }
