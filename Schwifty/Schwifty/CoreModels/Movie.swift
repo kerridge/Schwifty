@@ -1,4 +1,4 @@
-struct MovieDTO: Codable, Identifiable {
+struct ListMovieDTO: Codable, Identifiable {
     var id: Int
     var title: String
     var original_title: String
@@ -10,7 +10,7 @@ struct MovieDTO: Codable, Identifiable {
     static let placeholders: [Self] = (0..<10).map { i in
         let length = Int.random(in: 8..<30)
         
-        return MovieDTO(
+        return ListMovieDTO(
             id: i,
             title: String.random(length: length),
             original_title: "",
@@ -38,4 +38,8 @@ struct MovieDTO: Codable, Identifiable {
         self.overview = overview
         self.poster_path = poster_path
     }
+}
+
+struct MovieDTO: Codable, Identifiable {
+    var id: Int
 }

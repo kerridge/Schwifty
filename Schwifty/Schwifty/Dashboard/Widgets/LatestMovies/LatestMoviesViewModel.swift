@@ -26,7 +26,7 @@ final class LatestMoviesViewModel: WidgetViewModel, AsyncWidgetLoadable {
         self.state = .loading(placeholder: .placeholder)
         
         let oneSecond: UInt64 = 1_000_000_000
-//        try! await Task.sleep(nanoseconds: oneSecond * 2)
+        try! await Task.sleep(nanoseconds: oneSecond * 2)
         
         let result = await service.getLatest()
         

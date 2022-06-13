@@ -59,8 +59,8 @@
 
 /* Begin PBXFileReference section */
 		BB0685CF28560C2C00C1D557 /* LatestMovies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LatestMovies.swift; sourceTree = "<group>"; };
-		BB0685D42856BE0600C1D557 /* release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = release.xcconfig; sourceTree = "<group>"; };
-		BB0685D52856BEE200C1D557 /* release.template.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = release.template.xcconfig; sourceTree = "<group>"; };
+		BB0685D42856BE0600C1D557 /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
+		BB0685D52856BEE200C1D557 /* Release.template.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.template.xcconfig; sourceTree = "<group>"; };
 		BB0685D72856C29300C1D557 /* AppSecrets.stencil */ = {isa = PBXFileReference; lastKnownFileType = text; path = AppSecrets.stencil; sourceTree = "<group>"; };
 		BB09020D284F65560048FD6D /* LatestMoviesViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LatestMoviesViewModelTests.swift; sourceTree = "<group>"; };
 		BB090210284F783E0048FD6D /* WidgetStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetStore.swift; sourceTree = "<group>"; };
@@ -75,6 +75,7 @@
 		BB4F107D284C5A350095A8C1 /* SchwiftyUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchwiftyUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		BB4F108B284C5B9F0095A8C1 /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
 		BB4F108D284C5BB50095A8C1 /* DashboardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewModel.swift; sourceTree = "<group>"; };
+		BB68792E2857000200CF4F32 /* SourceryConfig.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = SourceryConfig.yml; sourceTree = "<group>"; };
 		BB9B62D4284C73D400A739A6 /* PageHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageHeader.swift; sourceTree = "<group>"; };
 		BB9B62D7284C765D00A739A6 /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		BB9B62D9284C766B00A739A6 /* LatestMoviesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LatestMoviesView.swift; sourceTree = "<group>"; };
@@ -135,7 +136,8 @@
 			children = (
 				BB0685D92856CD2C00C1D557 /* Generated */,
 				BB0685D62856C02000C1D557 /* Templates */,
-				BB0685D42856BE0600C1D557 /* release.xcconfig */,
+				BB0685D42856BE0600C1D557 /* Release.xcconfig */,
+				BB68792E2857000200CF4F32 /* SourceryConfig.yml */,
 			);
 			path = BuildConfig;
 			sourceTree = "<group>";
@@ -144,7 +146,7 @@
 			isa = PBXGroup;
 			children = (
 				BB0685D72856C29300C1D557 /* AppSecrets.stencil */,
-				BB0685D52856BEE200C1D557 /* release.template.xcconfig */,
+				BB0685D52856BEE200C1D557 /* Release.template.xcconfig */,
 			);
 			path = Templates;
 			sourceTree = "<group>";
@@ -446,7 +448,6 @@
 /* Begin PBXShellScriptBuildPhase section */
 		BB0685D82856C30600C1D557 /* Generate App Secrets */ = {
 			isa = PBXShellScriptBuildPhase;
-			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -461,7 +462,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "echo $TMDB_API_KEY\n\nmkdir -p BuildConfig/Generated\n\n/usr/local/opt/sourcery/bin/sourcery \\\n    --sources . \\\n    --templates BuildConfig/Templates/AppSecrets.stencil \\\n    --output BuildConfig/Generated \\\n    --args tmdbApiKey=\\\"$TMDB_API_KEY\\\"\n";
+			shellScript = "mkdir -p BuildConfig/Generated\n\n/usr/local/opt/sourcery/bin/sourcery \\\n    --config BuildConfig/SourceryConfig.yml\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -534,7 +535,6 @@
 /* Begin XCBuildConfiguration section */
 		BB4F107F284C5A350095A8C1 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BB0685D42856BE0600C1D557 /* release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -649,6 +649,7 @@
 		};
 		BB4F1082284C5A350095A8C1 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BB0685D42856BE0600C1D557 /* Release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

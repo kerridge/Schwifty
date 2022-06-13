@@ -8,12 +8,12 @@ struct MovieListItem: Identifiable {
     let id: Int
     let title: String
     
-    init(movie: MovieDTO) {
+    init(movie: ListMovieDTO) {
         id = movie.id
         title = movie.title
     }
     
-    static let placeholders = MovieDTO.placeholders.map {
+    static let placeholders = ListMovieDTO.placeholders.map {
         MovieListItem(movie: $0)
     }
 }

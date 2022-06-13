@@ -1,0 +1,8 @@
+sources:
+  - .
+templates:
+  - Templates/AppSecrets.stencil
+output:
+    Generated
+args:
+    tmdbApiKey: ${TMDB_API_KEY}
