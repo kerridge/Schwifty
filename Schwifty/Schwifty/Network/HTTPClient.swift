@@ -5,6 +5,24 @@ protocol HTTPClient {
 }
 
 extension HTTPClient {
+    func buildRequest(endpoint: Endpoint, path: String) -> URLRequest? {
+        guard let url = URL(string: endpoint.baseURL + path) else {
+            return nil
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = endpoint.method.rawValue
+        request.allHTTPHeaderFields = endpoint.header
+        
+        if let body = endpoint.body {
+            request.httpBody = try? JSONSerialization.data(withJSONObject: body, options: [])
+        }
+        
+        return request
+    }
+}
+
+extension HTTPClient {
     func sendRequest<T: Decodable>(
         endpoint: Endpoint,
         responseModel: T.Type
@@ -12,7 +30,7 @@ extension HTTPClient {
         var path = endpoint.path
         
         while path.hasPrefix("/") {
-            path.remove(at: path.startIndex)
+            path.removeFirst()
         }
         
         guard let url = URL(string: endpoint.baseURL + path) else {

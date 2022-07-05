@@ -131,11 +131,11 @@ class LatestMoviesViewModelTests: XCTestCase {
 
 private extension LatestMoviesViewModel {
     static let testInstance: LatestMoviesViewModel =
-        .init(dependencies: .init(title: "Latest Movies"))
+        .init(dependencies: .init(title: "Latest Movies", service: LatestMoviesService()))
 }
 
 private extension Widget {
-    // exhaustive list of available widgets
+    // exhaustive list of available widget
     static let testInstances: [Widget] = [
         .latestMovies(.testInstance),
         .trendingMovies

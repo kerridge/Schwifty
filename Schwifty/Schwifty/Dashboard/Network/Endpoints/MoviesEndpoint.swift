@@ -1,4 +1,4 @@
-enum MoviesEndpoint: Endpoint {
+enum MoviesEndpoint: TMDBEndpoint {
     case latest
     
     var path: String {
@@ -18,6 +18,7 @@ enum MoviesEndpoint: Endpoint {
     var header: [String : String]? {
         // Access Token to use in Bearer header
         let accessToken = AppSecrets.tmdbApiKey
+        
         switch self {
         case .latest:
             return [

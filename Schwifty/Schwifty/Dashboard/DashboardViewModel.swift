@@ -14,6 +14,8 @@ final class DashboardViewModel: ObservableObject {
         .trendingMovies
     ]
     
+    
+    
     lazy var latestMoviesVM = LatestMoviesViewModel(
         dependencies: .init(
             title: "Latest Movies",
