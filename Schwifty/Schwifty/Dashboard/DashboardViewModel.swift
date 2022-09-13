@@ -1,6 +1,6 @@
 import Foundation
 import SwiftUI
-
+ 
 final class DashboardViewModel: ObservableObject {
     @Published var title: String = "Movies!"
     
@@ -13,8 +13,6 @@ final class DashboardViewModel: ObservableObject {
         .latestMovies(latestMoviesVM),
         .trendingMovies
     ]
-    
-    
     
     lazy var latestMoviesVM = LatestMoviesViewModel(
         dependencies: .init(

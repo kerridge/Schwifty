@@ -25,15 +25,16 @@ final class LatestMoviesViewModel: WidgetViewModel, AsyncWidgetLoadable {
     func load() async {
         self.state = .loading(placeholder: .placeholder)
         
+        // do async work
         let oneSecond: UInt64 = 1_000_000_000
-        try! await Task.sleep(nanoseconds: oneSecond * 2)
+        try! await Task.sleep(nanoseconds: oneSecond * 1)
         
         let result = await service.getLatest()
         
         switch result {
         case .success(let page):
             latest.movies = page.results.map { MovieListItem(movie: $0) }
-            
+
         case .failure(let error):
             return self.state = .error(error)
         }

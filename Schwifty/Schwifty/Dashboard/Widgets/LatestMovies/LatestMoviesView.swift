@@ -25,5 +25,6 @@ struct LatestMoviesView<ViewModel: LatestMoviesViewModel>: View {
                 }
             )
         }
+        .frame(height: 400)
     }
 }

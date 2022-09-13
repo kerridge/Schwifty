@@ -19,6 +19,7 @@
 		BB4F108C284C5B9F0095A8C1 /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB4F108B284C5B9F0095A8C1 /* DashboardView.swift */; };
 		BB4F108E284C5BB50095A8C1 /* DashboardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB4F108D284C5BB50095A8C1 /* DashboardViewModel.swift */; };
 		BB6879302857038100CF4F32 /* MockHTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB68792F2857038100CF4F32 /* MockHTTPClient.swift */; };
+		BB6B25F428D024B400BFF1F7 /* TrendingMoviesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB6B25F328D024B400BFF1F7 /* TrendingMoviesView.swift */; };
 		BB9B62D5284C73D400A739A6 /* PageHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB9B62D4284C73D400A739A6 /* PageHeader.swift */; };
 		BB9B62D8284C765D00A739A6 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB9B62D7284C765D00A739A6 /* Movie.swift */; };
 		BB9B62DA284C766B00A739A6 /* LatestMoviesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB9B62D9284C766B00A739A6 /* LatestMoviesView.swift */; };
@@ -79,6 +80,7 @@
 		BB4F108D284C5BB50095A8C1 /* DashboardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewModel.swift; sourceTree = "<group>"; };
 		BB68792E2857000200CF4F32 /* SourceryConfig.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = SourceryConfig.yml; sourceTree = "<group>"; };
 		BB68792F2857038100CF4F32 /* MockHTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockHTTPClient.swift; sourceTree = "<group>"; };
+		BB6B25F328D024B400BFF1F7 /* TrendingMoviesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingMoviesView.swift; sourceTree = "<group>"; };
 		BB9B62D4284C73D400A739A6 /* PageHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageHeader.swift; sourceTree = "<group>"; };
 		BB9B62D7284C765D00A739A6 /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		BB9B62D9284C766B00A739A6 /* LatestMoviesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LatestMoviesView.swift; sourceTree = "<group>"; };
@@ -197,7 +199,7 @@
 			children = (
 				BB0685CE28560B9100C1D557 /* CoreModels */,
 				BB9B62EF284E346100A739A6 /* Network */,
-				BB4F108F284C6FF00095A8C1 /* SharedComponents */,
+				BB4F108F284C6FF00095A8C1 /* Shared */,
 				BB4F108A284C5B690095A8C1 /* Dashboard */,
 				BB4F1060284C5A2F0095A8C1 /* SchwiftyApp.swift */,
 				BB4F1064284C5A350095A8C1 /* Assets.xcassets */,
@@ -244,18 +246,43 @@
 			path = Dashboard;
 			sourceTree = "<group>";
 		};
-		BB4F108F284C6FF00095A8C1 /* SharedComponents */ = {
+		BB4F108F284C6FF00095A8C1 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				BB716B682873D88A008EDD68 /* Util */,
+				BB716B672873D880008EDD68 /* Components */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		BB6B25F228D024A000BFF1F7 /* TrendingMovies */ = {
+			isa = PBXGroup;
+			children = (
+				BB6B25F328D024B400BFF1F7 /* TrendingMoviesView.swift */,
+			);
+			path = TrendingMovies;
+			sourceTree = "<group>";
+		};
+		BB716B672873D880008EDD68 /* Components */ = {
 			isa = PBXGroup;
 			children = (
 				BB9B62D4284C73D400A739A6 /* PageHeader.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		BB716B682873D88A008EDD68 /* Util */ = {
+			isa = PBXGroup;
+			children = (
 				BB9B62EB284E0A4000A739A6 /* String+Extensions.swift */,
 			);
-			path = SharedComponents;
+			path = Util;
 			sourceTree = "<group>";
 		};
 		BB9B62D6284C761300A739A6 /* Widgets */ = {
 			isa = PBXGroup;
 			children = (
+				BB6B25F228D024A000BFF1F7 /* TrendingMovies */,
 				BB9B6300284EF9AC00A739A6 /* WidgetLoading */,
 				BB9B62DE284C76C200A739A6 /* LatestMovies */,
 				BB9B62DF284C76D800A739A6 /* Widget.swift */,
@@ -484,6 +511,7 @@
 				BB4F108C284C5B9F0095A8C1 /* DashboardView.swift in Sources */,
 				BB9B62D5284C73D400A739A6 /* PageHeader.swift in Sources */,
 				BB9B62E0284C76D800A739A6 /* Widget.swift in Sources */,
+				BB6B25F428D024B400BFF1F7 /* TrendingMoviesView.swift in Sources */,
 				BB9B62FB284E371C00A739A6 /* MoviesEndpoint.swift in Sources */,
 				BBCAB2902856E81500C6A920 /* AppSecrets.generated.swift in Sources */,
 				BB9B62E6284C8F9000A739A6 /* AsyncWidgetLoadable.swift in Sources */,

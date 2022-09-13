@@ -18,7 +18,7 @@ extension Widget {
         case .latestMovies(let vm):
             LatestMoviesView(viewModel: vm)
         case .trendingMovies:
-            EmptyView()
+            TrendingMoviesView()
         }
     }
 }

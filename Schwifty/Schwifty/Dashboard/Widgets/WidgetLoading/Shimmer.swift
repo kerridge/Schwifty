@@ -30,7 +30,10 @@ struct ShimmeringView<Content: View>: View {
     @State private var startPoint: UnitPoint
     @State private var endPoint: UnitPoint
     
-    init(configuration: ShimmerConfiguration, @ViewBuilder content: @escaping () -> Content) {
+    init(
+        configuration: ShimmerConfiguration,
+        @ViewBuilder content: @escaping () -> Content
+    ) {
         self.configuration = configuration
         self.content = content
         _startPoint = .init(wrappedValue: configuration.initialLocation.start)

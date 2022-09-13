@@ -25,10 +25,10 @@ struct WidgetCard<Content: View, RightAction: View>: View {
                 
                 rightAction()
             }
-                .padding([.top, .horizontal])
+                .padding([.top, .horizontal]) 
             
             content()
-                .padding()
+//                .padding()
         }
         .background(Color.white)
         .cornerRadius(12.0)
